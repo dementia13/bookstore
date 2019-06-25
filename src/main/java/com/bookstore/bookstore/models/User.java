@@ -27,7 +27,10 @@ public class User implements UserDetails {
     private String email;
     private String phone;
 
-    private Boolean enable;
+    private Boolean enabled=true;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -47,11 +50,11 @@ public class User implements UserDetails {
     }
 
     public Boolean getEnable() {
-        return enable;
+        return enabled;
     }
 
     public void setEnable(Boolean enable) {
-        this.enable = enable;
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -65,12 +68,6 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -125,6 +122,19 @@ public class User implements UserDetails {
         this.phone = phone;
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -137,7 +147,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     @Override

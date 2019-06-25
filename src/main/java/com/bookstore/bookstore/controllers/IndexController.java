@@ -31,11 +31,11 @@ public class IndexController {
 
     }
 
-    @RequestMapping("/")
+/*    @RequestMapping("/")
     public String index() {
         return "index";
     }
-
+*/
 
     @RequestMapping("/login")
     public String login(Model model) {
