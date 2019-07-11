@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,23 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
     private String username;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<UserPayment> getUserPaymentList() {
+        return userPaymentList;
+    }
+
+    public void setUserPaymentList(List<UserPayment> userPaymentList) {
+        this.userPaymentList = userPaymentList;
+    }
+
     private String password;
     private String firstName;
     private String lastName;
@@ -26,11 +44,20 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, updatable = false)
     private String email;
     private String phone;
-
     private Boolean enabled=true;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private ShoppingCart shoppingCart;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<UserShipping> userShippingList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserPayment> userPaymentList;
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
