@@ -1,21 +1,26 @@
 package com.bookstore.bookstore.controllers;
 
 import com.bookstore.bookstore.models.Book;
+import com.bookstore.bookstore.models.Category;
 import com.bookstore.bookstore.models.Genre;
+import com.bookstore.bookstore.models.User;
 import com.bookstore.bookstore.repositories.BookRepository;
-import com.bookstore.bookstore.services.BookService;
-import com.bookstore.bookstore.services.GenreService;
+import com.bookstore.bookstore.repositories.CategoryRepository;
+import com.bookstore.bookstore.repositories.GenreRepository;
+import com.bookstore.bookstore.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
+import java.security.Principal;
+import java.util.*;
 
 @Controller
 @RequestMapping("/book")
@@ -23,13 +28,22 @@ public class BookController {
 
 
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private GenreService genreService;
+
+    @Autowired
+    private GenreRepository genreRepository;
 
     @Autowired
     private BookService bookService;
 
     @Autowired
-    private GenreService genreService;
+    private UserService userService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
@@ -58,20 +72,6 @@ public class BookController {
         return "addBook";
     }
 
-    @RequestMapping("/genreBrowser")
-    public String showGenres(Model model){
-        List<Genre> genres = genreService.listGenres();
-        System.out.println(genres);
-        model.addAttribute("genres", genres);
-        return "genreBrowser";
-    }
-
-    @RequestMapping("/searchTitle")
-    public List<Book> searchTitle(@RequestParam("title") String title){
-        return null;
-    }
-    @RequestMapping("/genre/{genreId}")
-    public String listByGenre(@PathVariable(value = "genreId")long genreId, Model model){
 
         Genre genre = new Genre();
         genre.setID(genreId);
@@ -119,3 +119,4 @@ public class BookController {
 //    }
 
 
+}
