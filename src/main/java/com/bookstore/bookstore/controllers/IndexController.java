@@ -288,7 +288,8 @@ public class IndexController {
 
         return "bookshelf";
     }
-*/
+
+
     @RequestMapping("/bookDetail")
     public String bookDetail(
             @PathParam("id") Long id, Model model, Principal principal
