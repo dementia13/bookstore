@@ -22,10 +22,11 @@ public class Order {
     private List<CartItem> cartItemList;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private Payment payment;
+    private ShippingAddress shippingAddress;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private ShippingAddress shippingAddress;
+    private Payment payment;
+
 
     @ManyToOne
     private User user;
@@ -37,6 +38,7 @@ public class Order {
     public void setCartItemList(List<CartItem> cartItemList) {
         this.cartItemList = cartItemList;
     }
+  
     public Long getId() {
         return id;
     }
@@ -51,6 +53,22 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public Date getShippingDate() {
+        return shippingDate;
+    }
+
+    public void setShippingDate(Date shippingDate) {
+        this.shippingDate = shippingDate;
+    }
+
+    public String getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(String shippingMethod) {
+        this.shippingMethod = shippingMethod;
     }
 
     public String getOrderStatus() {
@@ -79,24 +97,26 @@ public class Order {
     public ShippingAddress getShippingAddress() {
         return shippingAddress;
     }
+
+      public List<CartItem> getCartItemList() {
+        return cartItemList;
+    }
+
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
+    }
+
     public void setShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
 
-    public Date getShippingDate() {
-        return shippingDate;
+
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setShippingDate(Date shippingDate) {
-        this.shippingDate = shippingDate;
-    }
-
-    public String getShippingMethod() {
-        return shippingMethod;
-    }
-
-    public void setShippingMethod(String shippingMethod) {
-        this.shippingMethod = shippingMethod;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public User getUser() {

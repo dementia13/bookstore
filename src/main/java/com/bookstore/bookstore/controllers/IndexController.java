@@ -88,10 +88,12 @@ public class IndexController {
         List<String> languageList = bookService.findDistinctLanguageBy();
         List<String> categoryList = bookService.findDistinctCategoryBy();
         List<String> formatList = bookService.findDistinctFormatBy();
+        List<String> genreList = bookService.findDistinctGenreBy();
 
         model.addAttribute("bookList", bookList);
         model.addAttribute("languageList", languageList);
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("genreList", genreList);
         model.addAttribute("formatList", formatList);
 
         BookshelfForm bf = new BookshelfForm(sort);
@@ -121,6 +123,7 @@ public class IndexController {
                             @RequestParam(value = "language", required = false) String language,
                             @RequestParam(value = "category", required = false) String category,
                             @RequestParam(value = "format", required = false) String format,
+                            @RequestParam(value = "genre", required = false) String genre,
                             Model model, Principal principal) {
 
         List<Book> bookList = bookService.findAll(); //Initializing to full list
@@ -218,19 +221,25 @@ public class IndexController {
         if(!category.equalsIgnoreCase("nochoice"))
             bookList.removeIf(book -> !(book.getCategory().equalsIgnoreCase(category)));
 
+        /* GENRE FILTER */
+
+        if(!genre.equalsIgnoreCase("nochoice"))
+            bookList.removeIf(book -> !(book.getGenre().equalsIgnoreCase(genre)));
+
         /* FORMAT FILTER */
 
         if(!format.equalsIgnoreCase("nochoice"))
             bookList.removeIf(book -> !(book.getFormat().equalsIgnoreCase(format)));
 
 
-
         List<String> languageList = bookService.findDistinctLanguageBy();
         List<String> categoryList = bookService.findDistinctCategoryBy();
+        List<String> genreList = bookService.findDistinctGenreBy();
         List<String> formatList = bookService.findDistinctFormatBy();
 
         model.addAttribute("languageList", languageList);
         model.addAttribute("categoryList", categoryList);
+        model.addAttribute("genreList", genreList);
         model.addAttribute("formatList", formatList);
         model.addAttribute("bookList", bookList);
         BookshelfForm bf = new BookshelfForm(sort);
@@ -285,7 +294,6 @@ public class IndexController {
 
         return "bookshelf";
     }
-
 
     @RequestMapping("/bookDetail")
     public String bookDetail(

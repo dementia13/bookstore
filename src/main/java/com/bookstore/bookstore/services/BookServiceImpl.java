@@ -21,7 +21,8 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAll() {
         return (List<Book>) bookRepository.findAll();
     }
-
+    public Optional<Book> findBookById(Long id) {
+        return bookRepository.findById(id);
     @Override
     public Book findBookById(Long id) {
         return bookRepository.findBookById(id);
@@ -118,6 +119,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<String>findDistinctFormatBy(){
         return bookRepository.findDistinctFormatBy();
+    }
+
+    @Override
+    public List<String> findDistinctGenreBy() {
+        return bookRepository.findDistinctGenreBy();
     }
 
 

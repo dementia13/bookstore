@@ -3,6 +3,9 @@ package com.bookstore.bookstore.controllers;
 import com.bookstore.bookstore.models.Book;
 import com.bookstore.bookstore.models.Genre;
 import com.bookstore.bookstore.repositories.BookRepository;
+import com.bookstore.bookstore.services.BookService;
+import com.bookstore.bookstore.services.GenreService;
+import com.bookstore.bookstore.repositories.CategoryRepository;
 import com.bookstore.bookstore.repositories.GenreRepository;
 import com.bookstore.bookstore.services.BookService;
 import com.bookstore.bookstore.services.CategoryService;
@@ -20,6 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/book")
@@ -27,16 +34,7 @@ public class BookController {
 
 
     @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
     private BookRepository bookRepository;
-
-    @Autowired
-    private GenreService genreService;
-
-    @Autowired
-    private GenreRepository genreRepository;
 
     @Autowired
     private BookService bookService;
@@ -46,6 +44,16 @@ public class BookController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addBook(Model model) {
+        Set<String> genreList = new TreeSet<>();
+        genreList.addAll(bookService.findDistinctGenreBy());
+        genreList.add("Thriller");
+        genreList.add("Textbook");
+        genreList.add("Fantasy");
+        genreList.add("History");
+        genreList.add("Science Fiction");
+        genreList.add("Biography");
+
+        model.addAttribute("genreList", genreList);
         Book book = new Book();
         model.addAttribute("book", book);
         return "addBook";
@@ -67,10 +75,33 @@ public class BookController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "addBook";
     }
 
+ 
+    @RequestMapping("/genreBrowser")
+    public String showGenres(Model model){
+        List<Genre> genres = genreService.listGenres();
+        System.out.println(genres);
+        model.addAttribute("genres", genres);
+        return "genreBrowser";
+    }
+
+    @RequestMapping("/searchTitle")
+    public List<Book> searchTitle(@RequestParam("title") String title){
+        return null;
+    }
+    @RequestMapping("/genre/{genreId}")
+    public String listByGenre(@PathVariable(value = "genreId")long genreId, Model model){
+
+        Genre genre = new Genre();
+        genre.setID(genreId);
+        List<Book> books = bookRepository.findAllById(genreId);
+        System.out.println(books);
+        model.addAttribute("bookList", books);
+        return "bookshelf";
+    }
+}
 
         Genre genre = new Genre();
  //       genre.setID(genreId);
