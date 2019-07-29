@@ -7,7 +7,6 @@ import com.bookstore.bookstore.security.UserRole;
 import com.bookstore.bookstore.services.*;
 import com.bookstore.bookstore.utility.MailConstructor;
 import com.bookstore.bookstore.utility.SecurityUtility;
-
 import com.bookstore.bookstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -18,8 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.bookstore.bookstore.repositories.BookRepository;
-
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,7 +109,7 @@ public class IndexController {
 
         return "bookshelf";
     }
-
+*/
     @RequestMapping(value = "/formbookshelf")
     public String bookshelf(@RequestParam(value = "topseller", required = false) Boolean topseller,
                             @RequestParam(value = "sortColumn", required = false) String sort,
@@ -132,7 +129,7 @@ public class IndexController {
         List<Book> bookList = bookService.findAll(); //Initializing to full list
 
 
-        /*   Sorting books based on user selection */
+        //   Sorting books based on user selection */
 
         if (sort == null || "".equals(sort) || "title".equalsIgnoreCase(sort)) {
             sort = "title";

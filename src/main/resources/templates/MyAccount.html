@@ -76,30 +76,36 @@
                aria-controls="pills-home" aria-selected="true" >Login</a>
         </li>
         <li class="nav-item item2"  >
-            <a class="nav-link "  th:classappend="${classActiveNewAccount}? 'active'"  id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            <a class="nav-link "  th:classappend="${classActiveNewAccount}? 'active'"  id="pills-profile-tab"
+               data-toggle="pill" href="#pills-profile" role="tab"
                aria-controls="pills-profile" aria-selected="false">Create New Account</a>
         </li>
         <li class="nav-item item3 "   >
-            <a class="nav-link" th:classappend="${classActiveForgetPassword}? 'active'"  id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+            <a class="nav-link" th:classappend="${classActiveForgetPassword}? 'active'"  id="pills-contact-tab"
+               data-toggle="pill" href="#pills-contact" role="tab"
                aria-controls="pills-contact" aria-selected="false">Forget Password</a>
         </li>
     </ul>
 
     <div class="tab-content" id="pills-tabContent" >
 
-        <div class="tab-pane fade show"  th:classappend="${classActiveLogin}? ' in active'"   id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"  >
+        <div class="tab-pane fade show"  th:classappend="${classActiveLogin}? ' in active'"   id="pills-home"
+             role="tabpanel" aria-labelledby="pills-home-tab"  >
 
             <div class="row">
                 <div class="col-sm-4">
-                    <div th:if="${param.error != null}" > <p th:title="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">Invalid username or password.</p></div>
+                    <div th:if="${param.error != null}" > <p th:title="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                        Invalid username or password.</p></div>
 
                     <form th:action="@{/login}" method="post">
                         <div class="form-group">
-                            <input required type="text" class="form-control" id="username1" name="username" aria-describedby="emailHelp" placeholder="Enter Username">
+                            <input required type="text" class="form-control" id="username1" name="username"
+                                   aria-describedby="emailHelp" placeholder="Enter Username">
                             <div class="label tip-email" style="color: white">Username</div>
                         </div>
                         <div class="form-group">
-                            <input required type="password" class="form-control" id="exampleInputPassword1"  name="password" placeholder="Enter Password">
+                            <input required type="password" class="form-control" id="exampleInputPassword1"
+                                   name="password" placeholder="Enter Password">
                             <div class="label tip-email" style="color: white">Password</div>
                         </div>
 
@@ -109,7 +115,8 @@
             </div>
         </div>
 
-        <div class="tab-pane fade show "  th:classappend="${classActiveNewAccount}? ' in active'"   id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"  >
+        <div class="tab-pane fade show "  th:classappend="${classActiveNewAccount}? ' in active'"   id="pills-profile"
+             role="tabpanel" aria-labelledby="pills-profile-tab"  >
             <div class="row">
                 <div class="col-sm-4">
                     <div class="alert alert-info" th:if="${emailSent}">

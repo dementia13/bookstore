@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class CartItemServiceImpl implements CartItemService{
     public CartItem updateCartItem(CartItem cartItem) {
         BigDecimal bigDecimal = new BigDecimal(cartItem.getBook().getOurPrice()).multiply(new BigDecimal(cartItem.getQty()));
 
-        bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+        bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);
         cartItem.setItemSubtotal(bigDecimal);
 
         cartItemRepository.save(cartItem);

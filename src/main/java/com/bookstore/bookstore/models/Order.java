@@ -27,9 +27,18 @@ public class Order {
     @OneToOne(cascade=CascadeType.ALL)
     private Payment payment;
 
+
     @ManyToOne
     private User user;
 
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
+    }
+
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
+    }
+  
     public Long getId() {
         return id;
     }
@@ -78,7 +87,18 @@ public class Order {
         this.orderTotal = orderTotal;
     }
 
-    public List<CartItem> getCartItemList() {
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+      public List<CartItem> getCartItemList() {
         return cartItemList;
     }
 
@@ -86,13 +106,10 @@ public class Order {
         this.cartItemList = cartItemList;
     }
 
-    public ShippingAddress getShippingAddress() {
-        return shippingAddress;
-    }
-
     public void setShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
+
 
     public Payment getPayment() {
         return payment;
