@@ -22,14 +22,21 @@ public class Order {
     private List<CartItem> cartItemList;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private ShippingAddress shippingAddress;
+    private Payment payment;
 
     @OneToOne(cascade=CascadeType.ALL)
-    private Payment payment;
+    private ShippingAddress shippingAddress;
 
     @ManyToOne
     private User user;
 
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
+    }
+
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
+    }
     public Long getId() {
         return id;
     }
@@ -44,22 +51,6 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public Date getShippingDate() {
-        return shippingDate;
-    }
-
-    public void setShippingDate(Date shippingDate) {
-        this.shippingDate = shippingDate;
-    }
-
-    public String getShippingMethod() {
-        return shippingMethod;
-    }
-
-    public void setShippingMethod(String shippingMethod) {
-        this.shippingMethod = shippingMethod;
     }
 
     public String getOrderStatus() {
@@ -78,28 +69,34 @@ public class Order {
         this.orderTotal = orderTotal;
     }
 
-    public List<CartItem> getCartItemList() {
-        return cartItemList;
-    }
-
-    public void setCartItemList(List<CartItem> cartItemList) {
-        this.cartItemList = cartItemList;
-    }
-
-    public ShippingAddress getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(ShippingAddress shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
     public Payment getPayment() {
         return payment;
     }
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Date getShippingDate() {
+        return shippingDate;
+    }
+
+    public void setShippingDate(Date shippingDate) {
+        this.shippingDate = shippingDate;
+    }
+
+    public String getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(String shippingMethod) {
+        this.shippingMethod = shippingMethod;
     }
 
     public User getUser() {

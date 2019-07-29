@@ -46,6 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/showGenres",
             "/bookshelf",
             "/bookDetail",
+            "/shoppingCart",
+            "/savedCarts",
             "/book/genreBrowser",
             "/book/categoryBrowser",
             "/formbookshelf",

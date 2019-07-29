@@ -18,14 +18,6 @@ public class BookToCartItem {
     @JoinColumn(name = "cart_item_id")
     private CartItem cartItem;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Book getBook() {
         return book;
     }
@@ -40,5 +32,13 @@ public class BookToCartItem {
 
     public void setCartItem(CartItem cartItem) {
         this.cartItem = cartItem;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

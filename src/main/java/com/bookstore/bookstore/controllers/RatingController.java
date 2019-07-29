@@ -4,8 +4,6 @@ package com.bookstore.bookstore.controllers;
 import com.bookstore.bookstore.models.Book;
 import com.bookstore.bookstore.models.Review;
 import com.bookstore.bookstore.models.User;
-//import com.bookstore.service.UserService;
-
 import com.bookstore.bookstore.services.BookService;
 import com.bookstore.bookstore.services.ReviewService;
 import com.bookstore.bookstore.services.UserService;
@@ -21,6 +19,9 @@ import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+
+//import com.bookstore.service.UserService;
+//import sun.plugin2.main.client.MacOSXMozillaServiceDelegate;
 
 @Controller
 
